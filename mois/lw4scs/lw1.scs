@@ -1,0 +1,62 @@
+lw4_1=[*
+    sc_node_class
+    -> concept_length;
+    -> concept_exact_value;
+    -> concept_geometry_figure;
+    -> concept_triangle;
+    -> concept_right_triangle;
+    -> concept_number;
+    -> concept_2cm;
+    -> concept_13cm;
+    -> concept_circle;;
+
+sc_node_norole_relation
+    -> nrel_perimeter;
+    -> nrel_measurement_in_centimeters;
+    -> nrel_cathet;
+    -> nrel_radius;
+    -> nrel_hypotenuse;;
+    
+triangle_A_B_C
+    => nrel_perimeter: ... (*
+        <- concept_exact_value;;
+        <- concept_length;;
+        => nrel_measurement_in_centimeters: x;;
+    *);;
+
+triangle_A_B_C
+    -> ... (*
+        <- concept_circle;;
+        => nrel_radius: r (*
+            <- concept_2cm (*
+                <- concept_exact_value;;
+                <- concept_length;;
+                => nrel_measurement_in_centimeters: 2 (*
+                    <- concept_number;;
+                *);;
+            *);;
+        *);;
+    *);;
+
+triangle_A_B_C
+    => nrel_cathet: AB;
+    => nrel_cathet: BC;
+    => nrel_hypotenuse: AC (*
+        <- concept_13cm (*
+            <- concept_exact_value;;
+            <- concept_length;;
+            => nrel_measurement_in_centimeters: 13 (*
+                <- concept_number;;
+            *);;
+        *);;
+    *);;
+
+triangle_A_B_C
+    <- concept_right_triangle;;
+
+concept_right_triangle
+    <- concept_triangle;;
+
+concept_triangle
+    <- concept_geometry_figure;;
+*];;

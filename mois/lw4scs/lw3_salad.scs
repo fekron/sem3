@@ -1,0 +1,60 @@
+lw4_3_salad=[*
+    sc_node_class
+        -> concept_salad;
+        -> concept_cold_dish;
+        -> concept_sliced_food;
+        -> concept_condiment;;
+
+    sc_node_norole_relation
+        -> nrel_universality;
+        -> nrel_implication;
+        -> nrel_content;
+        -> nrel_is;;
+
+    sc_node_role_relation
+        -> rrel_linked_variables;
+        -> rrel_then;
+        -> rrel_if;;
+
+    sc_var
+        -> _x;
+        -> _y;
+        -> _a;
+        -> _b;;
+
+    nrel_universality
+        -> ... (*
+            -> rrel_linked_variables: [* _x <- sc_var;; *];;
+            -> ... (*
+                -> ... (*
+                    <- nrel_implication;;
+                    -> rrel_if: [*  _x <- concept_salad;; *];;
+                    -> rrel_then: ... (*
+                        <- nrel_universality;;
+                        -> rrel_linked_variables: [* 
+                            sc_var
+                                -> _y;
+                                -> _a;
+                                -> _b;;
+                         *];;
+                         -> ... (*
+                            <- nrel_implication;;
+                            -> rrel_if: [*
+                                concept_cold_dish _-> _y (*
+                                    _=> nrel_content: _a (*
+                                        _<- concept_sliced_food;;
+                                    *);;
+                                    _=> nrel_content: _b (*
+                                        _<- concept_condiment;;
+                                    *);;
+                                *);;
+                             *];;
+                             -> rrel_then: [*
+                                _y _=>nrel_is: _x;;
+                             *];;
+                         *);;
+                    *);;
+                *);;
+            *);;
+        *);;
+    *];;

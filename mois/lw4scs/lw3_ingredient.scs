@@ -1,0 +1,47 @@
+lw4_3_ingredient=[*
+    sc_node_class
+        -> concept_substance;
+        -> concept_component_part;
+        -> concept_complex_compound;;
+    
+    sc_node_norole_relation
+        -> nrel_universality;
+        -> nrel_implication;
+        -> nrel_ingredient;
+        -> nrel_is;;
+
+    sc_node_role_relation
+        -> rrel_linked_variables;
+        -> rrel_then;
+        -> rrel_if;;
+
+    sc_var 
+        -> _y;
+        -> _a;
+        -> _b;;
+    
+    nrel_universality
+        -> ... (*
+            -> rrel_linked_variables: [* 
+                sc_var
+                    -> _y;
+                    -> _a;
+                    -> _b;;
+            *];;
+            -> ... (*
+                <- nrel_implication;;
+                -> rrel_if: [*
+                    concept_substance _-> _y (*
+                        _=> nrel_is: _a (*
+                            _<- concept_component_part;;
+                        *);;
+                    *);;
+                *];;
+                -> rrel_then: [*
+                    concept_complex_compound _-> _b (*
+                        _<= nrel_ingredient: _y;;
+                    *);;
+                *];;
+            *);;
+        *);;
+*];;
